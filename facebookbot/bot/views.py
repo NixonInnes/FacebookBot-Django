@@ -4,4 +4,7 @@ from django.http.response import HttpResponse
 
 class BotView(generic.View):
     def get(self, request, *args, **kwargs):
-        return HttpResponse("Hello World")
+        if self.request.GET['hub.verify_token'] == 'dickbutt':
+            return HttpResponse(self.request.GET['hub.challenge'])
+        else:
+            return HttpResponse('Error, invalid token.')
